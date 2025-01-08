@@ -1,5 +1,6 @@
-// src/trie.js
-
+/**
+ * Trie data structure for prefix + word checks
+ */
 export class TrieNode {
     constructor() {
       this.children = {};

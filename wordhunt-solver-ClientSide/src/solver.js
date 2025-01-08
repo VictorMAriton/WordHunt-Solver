@@ -1,4 +1,3 @@
-// src/solver.js
 import { Trie } from "./trie";
 
 const DIRECTIONS = [
@@ -7,27 +6,35 @@ const DIRECTIONS = [
   [1, -1],  [1, 0],  [1, 1],
 ];
 
+/**
+ * Takes an array of words, builds a trie
+ */
 export function buildTrieFromArray(wordArray) {
   const trie = new Trie();
-  wordArray.forEach((word) => {
-    const clean = word.trim().toUpperCase();
+  for (const w of wordArray) {
+    const clean = w.trim().toUpperCase();
     if (clean) trie.insert(clean);
-  });
+  }
   return trie;
 }
 
+/**
+ * Takes a 4x4 board (uppercase letters) and a trie, returns:
+ *   [{ word, path: [[r,c],[r,c],...] }, ...]
+ * sorted by descending word length
+ */
 export function findWordsInBoard(board, trie) {
   const rows = board.length;
   const cols = board[0].length;
   const foundWords = new Set();
-  const wordPaths = {}; // word -> path (array of coordinates)
+  const wordPaths = {}; // word -> path array
 
   function dfs(r, c, prefix, path, visited) {
-    // If prefix not in trie, prune.
+    // If prefix not in trie, prune
     if (!trie.hasPrefix(prefix)) {
       return;
     }
-    // If prefix is a word, record it.
+    // If prefix is a valid word
     if (trie.hasWord(prefix)) {
       if (!foundWords.has(prefix)) {
         foundWords.add(prefix);
@@ -56,17 +63,12 @@ export function findWordsInBoard(board, trie) {
     }
   }
 
+  // DFS from each cell
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const visited = new Set();
       visited.add(`${r},${c}`);
-      dfs(
-        r,
-        c,
-        board[r][c],
-        [[r, c]],
-        visited
-      );
+      dfs(r, c, board[r][c], [[r, c]], visited);
     }
   }
 

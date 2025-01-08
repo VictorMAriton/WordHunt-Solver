@@ -1,6 +1,11 @@
-// src/WordViewer.jsx
 import React, { useState } from "react";
 
+/**
+ * WordViewer:
+ * - Shows a table with highlighted path cells
+ * - Draws arrows between consecutive path cells
+ * - "Previous" / "Next" to cycle through found words
+ */
 function WordViewer({ wordsWithPaths, board }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -26,12 +31,11 @@ function WordViewer({ wordsWithPaths, board }) {
   return (
     <div>
       <h2>
-        Word #{currentIndex + 1} / {wordsWithPaths.length}
+        Word {currentIndex + 1} / {wordsWithPaths.length}
       </h2>
       <h3>{word}</h3>
       <p>Length: {word.length}</p>
 
-      {/* Relative container to hold table + SVG overlay */}
       <div
         style={{
           position: "relative",
@@ -40,7 +44,7 @@ function WordViewer({ wordsWithPaths, board }) {
           marginBottom: "20px",
         }}
       >
-        {/* The 4x4 table */}
+        {/* 4x4 Table */}
         <table
           style={{
             borderCollapse: "collapse",
@@ -51,9 +55,12 @@ function WordViewer({ wordsWithPaths, board }) {
         >
           <tbody>
             {board.map((row, rIdx) => (
-              <tr key={rIdx} style={{ height: `${cellSize}px` }}>
+              <tr key={rIdx}>
                 {row.map((cell, cIdx) => {
-                  const isInPath = path.some(([pr, pc]) => pr === rIdx && pc === cIdx);
+                  // check if (rIdx, cIdx) is in the path
+                  const isInPath = path.some(
+                    ([pr, pc]) => pr === rIdx && pc === cIdx
+                  );
                   return (
                     <td
                       key={cIdx}
@@ -64,6 +71,8 @@ function WordViewer({ wordsWithPaths, board }) {
                         backgroundColor: isInPath ? "#FFD700" : "#fff",
                         fontSize: "1.2rem",
                         fontWeight: "bold",
+                        width: `${cellSize}px`,
+                        height: `${cellSize}px`,
                       }}
                     >
                       {cell}
