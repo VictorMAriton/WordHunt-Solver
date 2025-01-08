@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/WordHunt-Solver/static/js/main.9fc3672a.js",
+    "index.html": "/WordHunt-Solver/index.html",
+    "main.9fc3672a.js.map": "/WordHunt-Solver/static/js/main.9fc3672a.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.9fc3672a.js"
+  ]
+}
