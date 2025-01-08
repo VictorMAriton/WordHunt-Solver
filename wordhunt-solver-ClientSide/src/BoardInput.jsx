@@ -37,9 +37,20 @@ function BoardInput({ onSubmitBoard }) {
   };
 
   const handleSubmit = () => {
-    console.log("[BoardInput] handleSubmit -> calling onSubmitBoard with:", board);
+    // Flatten the 2D board into a single array
+    const allCells = board.flat();
+    // Check if every cell has exactly 1 letter
+    const allFilled = allCells.every((cell) => cell.trim().length === 1);
+  
+    if (!allFilled) {
+      alert("Please fill all 16 squares before finding words!");
+      return;  // Skip calling onSubmitBoard
+    }
+  
+    console.log("[BoardInput] handleSubmit -> onSubmitBoard:", board);
     onSubmitBoard(board);
   };
+  
 
   return (
     <div>
