@@ -3,7 +3,7 @@
 
 ![image](https://github.com/user-attachments/assets/5d9ea7f5-4618-4cdf-a31a-30b81d8bf26f)
 
-
+### Click Here to Use: [Here](https://victormariton.github.io/WordHunt-Solver/)
 ## How to use Locally: 
 1. Clone Repo and open folder with VsCode
 
